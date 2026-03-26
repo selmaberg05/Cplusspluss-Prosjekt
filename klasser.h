@@ -11,6 +11,7 @@ public:
     Ship(std::vector<std::pair<int, int>> positions);
     bool registerHit(int x, int y);
     bool isSunk();
+    bool occupiesPosition(int x, int y);
 };
 
 class Board {

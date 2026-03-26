@@ -28,6 +28,16 @@ bool Ship::isSunk() {
     return true;
 }
 
+bool Ship::occupiesPosition(int x, int y) {
+    for (int i=0; i < positions.size(); i++) {
+        if (positions[i].first== x && positions[i].second==y) {
+            return true;
+        }
+
+    }
+    return false;
+}
+
 Board::Board() {
     grid = std::vector<std::vector<char>>(10, std::vector<char>(10, '.'));
 }
@@ -79,7 +89,7 @@ void Board::placeShip(std::vector<std::pair<int, int>> positions) {
             throw std::out_of_range("Ship is out of bounds");
         }
 
-        if (grid[x][y] == 'S') {
+        if (grid[y][x] == 'S') {
             throw std::runtime_error("Ship overlaps another ship");
         }
     }
@@ -90,7 +100,7 @@ void Board::placeShip(std::vector<std::pair<int, int>> positions) {
     for (int i = 0; i < positions.size(); i++) {
         int x = positions[i].first;
         int y = positions[i].second;
-        grid[x][y] = 'S';
+        grid[y][x] = 'S';
     }
 }
 
@@ -99,17 +109,17 @@ bool Board::shoot(int x, int y) {
         throw std::out_of_range("Shoot is out of bounds");
     }
     
-    if (grid[x][y]=='X' || grid[x][y]=='O'){
+    if (grid[y][x]=='X' || grid[y][x]=='O'){
         throw std::runtime_error("Already Shot");  
     }
     for (Ship& ship : ships) {
         if (ship.registerHit(x, y)) {
-            grid[x][y] = 'X';
+            grid[y][x] = 'X';
             return true;
         }
     }
      
-    grid[x][y]='O';
+    grid[y][x]='O';
         
     return false;
         
@@ -136,5 +146,6 @@ bool Board::allShipsSunk() {
         
         }
     }
+    return true;
 
 }

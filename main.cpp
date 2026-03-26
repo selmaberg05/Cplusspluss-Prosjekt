@@ -5,24 +5,45 @@ int main() {
     Board board;
 
     //legg inn et skip
-    board.placeShip({{1,3}, {1,4}, {1,5}});
+    board.placeShip({{1,1}, {1,2}, {1,3}});
+    board.placeShip({{4, 4}, {5,4}, {6,4}});
 
-    //print med skip synlig
-    std::cout << "Mitt brett:\n";
-    board.printBoard(true);
+    while (board.allShipsSunk()==false) {
+        std::string input;
+        int x, y;
+        
 
-    std::cout << std::endl;
+        board.printBoard(false);
+        std::cout << "Skriv inn x og y (eller . for å avslutte):";
+        std::cin >> input;
 
-    //skyter
-    bool result1=board.shoot(1,3);
-    bool result2=board.shoot(0, 0);
-
-    //print igjen
-    std::cout << "Etter skudd:\n";
-    std::cout << result1 << std::endl;
-    std::cout << result2 << std:: endl;
+        if (input == ".") {
+            std::cout << "Spillet ble avsluttet. \n" ;
+            return 0;
+        }
     
-    board.printBoard(true);
+        try {
+            x=std::stoi(input);
+            std::cin >> y;
 
+            bool hit=board.shoot(x, y);
+
+            if (hit) {
+                std::cout<< "treff! \n";
+            } else {
+                std::cout<< "Bom! \n";        
+            }
+        }
+        catch (std:: exception& e) {
+            std::cout << "feil" << e.what() << std::endl;
+
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+        }
+    }
+    std::cout << "alle skip er sunket! Du vant! \n ";
     return 0;
 }
+
+
+ 
