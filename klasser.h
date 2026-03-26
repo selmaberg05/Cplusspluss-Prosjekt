@@ -23,5 +23,6 @@ public:
     void placeShip(std::vector<std::pair<int, int>> positions);
     bool shoot(int x, int y);
     void printBoard(bool showShips);
+    bool allShipsSunk();
 };
 
