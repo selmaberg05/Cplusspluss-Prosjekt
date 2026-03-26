@@ -128,3 +128,13 @@ void Board::printBoard(bool showShips) {
         std::cout << std::endl;
     }
 }
+
+bool Board::allShipsSunk() {
+    for (Ship& ship:ships) {
+        if (!ship.isSunk()) {
+            return false;
+        
+        }
+    }
+
+}
