@@ -1,5 +1,5 @@
 
-g++ main.cpp klasser.cpp -o battleship
+g++ main.cpp klasser.cpp game.cpp -o battleship
 
 
 ./battleship

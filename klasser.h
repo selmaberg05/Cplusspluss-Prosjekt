@@ -25,5 +25,6 @@ public:
     bool shoot(int x, int y);
     void printBoard(bool showShips);
     bool allShipsSunk();
+    bool shipSunkAt(int x, int y);
 };
 

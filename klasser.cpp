@@ -127,7 +127,14 @@ bool Board::shoot(int x, int y) {
 }
 
 void Board::printBoard(bool showShips) {
+    std::cout << "  ";
+    for (int j = 0; j < grid[0].size(); j++) {
+        std::cout << j << " ";
+    }
+    std::cout << std::endl;
+
     for (int i = 0; i < grid.size(); i++) {
+        std::cout << i << " ";
         for (int j = 0; j < grid[i].size(); j++) {
             if (grid[i][j] == 'S' && !showShips) {
                 std::cout << ". ";
@@ -147,5 +154,14 @@ bool Board::allShipsSunk() {
         }
     }
     return true;
+}
 
+bool Board::shipSunkAt(int x, int y) {
+    for (Ship& ship: ships) {
+        if (ship.occupiesPosition(x, y)) {
+            return ship.isSunk();
+        
+        }
+    }
+    return false;
 }
